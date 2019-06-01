@@ -12,7 +12,7 @@ import {
   providedIn: "root"
 })
 export class IncidentesService {
-  configUrl = "https://seguridadciudadana-5ba3d.firebaseio.com";
+  // configUrl = "https://seguridadciudadana-5ba3d.firebaseio.com";
 
   incidentes: Incidente[];
 
@@ -22,23 +22,23 @@ export class IncidentesService {
     return this.db.list('Incidentes').valueChanges();
   };
 
-  getIncidentes = () => {
-    return this.http
-      .get(`${this.configUrl}/Incidentes.json`)
-      .pipe(map(this.converToArray));
-  };
+  // getIncidentes = () => {
+  //   return this.http
+  //     .get(`${this.configUrl}/Incidentes.json`)
+  //     .pipe(map(this.converToArray));
+  // };
 
-  converToArray = (incidentes: object) => {
-    if (incidentes === null) {
-      return [];
-    }
-    const arrayIncidentes: Incidente[] = [];
-    Object.keys(incidentes).forEach(value => {
-      const incidente: Incidente = incidentes[value];
-      incidente.id = value;
-      arrayIncidentes.push(incidente);
-    });
-    console.log(arrayIncidentes);
-    return arrayIncidentes;
-  };
+  // converToArray = (incidentes: object) => {
+  //   if (incidentes === null) {
+  //     return [];
+  //   }
+  //   const arrayIncidentes: Incidente[] = [];
+  //   Object.keys(incidentes).forEach(value => {
+  //     const incidente: Incidente = incidentes[value];
+  //     incidente.id = value;
+  //     arrayIncidentes.push(incidente);
+  //   });
+  //   console.log(arrayIncidentes);
+  //   return arrayIncidentes;
+  // };
 }

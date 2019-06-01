@@ -24,14 +24,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  obtenerIncidentes() {
-    this.incidentesService.getIncidentes().subscribe(
-      res => (this.incidentes = res),
-      error => {
-        console.log(error);
-      }
-    );
-  }
+  // obtenerIncidentes() {
+  //   this.incidentesService.getIncidentes().subscribe(
+  //     res => (this.incidentes = res),
+  //     error => {
+  //       console.log(error);
+  //     }
+  //   );
+  // }
 
   markerClick = (indice) => {
     console.log(indice)
