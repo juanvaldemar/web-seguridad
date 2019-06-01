@@ -22,7 +22,7 @@ import { UsersComponent } from './pages/users/users.component';
     BrowserModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyClK74hNsEW6_FwUMNE2IW3AfnlWeyT1xA'
+      apiKey: ''
     }),
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
