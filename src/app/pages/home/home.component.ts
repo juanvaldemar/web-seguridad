@@ -27,11 +27,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.incidentesService.getIncidentes2().subscribe(res => {
-      this.incidentes = res;
-      this.loading = false;
-    });
+    this.filterBy(null)
   }
+
+
 
   // obtenerIncidentes() {
   //   this.incidentesService.getIncidentes().subscribe(
@@ -43,7 +42,11 @@ export class HomeComponent implements OnInit {
   // }
 
   filterBy = (value) => {
-    console.log(value)
+    value === 'Todas' ? value = null : null;
+    this.incidentesService.getIncidentes2(value).subscribe(res => {
+      this.incidentes = res;
+      this.loading = false;
+    });
   }
 
   markerClick = indice => {

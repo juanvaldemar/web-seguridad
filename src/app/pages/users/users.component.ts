@@ -8,13 +8,27 @@ import { ExcelService } from '../../services/excel.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+  categorias = [
+    "Todas",
+    "Incendio",
+    "Asalto",
+    "Secuestro",
+    "Prostitución",
+    "Asesinato"
+  ];
+  categoriaSeleccionada = 'Todas'
   loading:boolean = true
   usuarios = [];
   constructor(private usersService: UsersService, private excelService: ExcelService) {
   }
 
   ngOnInit() {
-    this.usersService.getUsers().subscribe(res => {
+    this.filterBy(null)
+  }
+
+  filterBy = (value) => {
+    value === 'Todas' ? value = null : null;
+    this.usersService.getUsers(value).subscribe(res => {
       this.usuarios = res;
       this.loading = false;
     });

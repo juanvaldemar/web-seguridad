@@ -10,7 +10,13 @@ export class UsersService {
 
   constructor(private db: AngularFireDatabase) {}
 
-  getUsers = () => {
-    return this.db.list('Users').valueChanges();
+  getUsers = (tipoCategoria) => {
+    return tipoCategoria
+      ? this.db
+          .list("Users", ref =>
+            ref.orderByChild('title').equalTo(tipoCategoria)
+          )
+          .valueChanges()
+      : this.db.list("Users").valueChanges();
   };
 }

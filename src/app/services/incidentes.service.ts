@@ -3,10 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Incidente } from "../models/Incidente.class";
 
-import {
-  AngularFireDatabase
-} from "@angular/fire/database";
-
+import { AngularFireDatabase } from "@angular/fire/database";
 
 @Injectable({
   providedIn: "root"
@@ -18,8 +15,14 @@ export class IncidentesService {
 
   constructor(private http: HttpClient, private db: AngularFireDatabase) {}
 
-  getIncidentes2 = () => {
-    return this.db.list('Incidentes').valueChanges();
+  getIncidentes2 = (tipoCategoria) => {
+    return tipoCategoria
+      ? this.db
+          .list("Incidentes", ref =>
+            ref.orderByChild("categoria").equalTo(tipoCategoria)
+          )
+          .valueChanges()
+      : this.db.list("Incidentes").valueChanges();
   };
 
   // getIncidentes = () => {
