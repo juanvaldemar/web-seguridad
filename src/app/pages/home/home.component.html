@@ -11,7 +11,13 @@
   <div class='mapContainer'>
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]=12>
       <agm-marker *ngFor="let incidente of incidentes; let i = index" (markerClick)='markerClick(i)'
-        [latitude]="incidente.latitud" [longitude]="incidente.longitud">
+        [latitude]="incidente.latitud" [longitude]="incidente.longitud"
+        [iconUrl] ="{url: incidente.categoria === 'Asesinato' ? '../../../assets/images/asesinato.png' :
+                          incidente.categoria === 'Secuestro' ? '../../../assets/images/secuestro.png' :
+                          incidente.categoria === 'Asalto' ? '../../../assets/images/asalto.png' :
+                          incidente.categoria === 'Incendio' ? '../../../assets/images/incendio.png' :
+                          incidente.categoria === 'Prostitución' ? '../../../assets/images/prostitucion.png' : null}"
+        >
         <agm-info-window [isOpen]="infoWindowOpen">
           <h5>{{incidente.categoria}}</h5>
           <p>{{incidente.descripcion}}</p>

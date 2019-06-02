@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { IncidentesService } from "src/app/services/incidentes.service";
-
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
