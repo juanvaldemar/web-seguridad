@@ -1,21 +1,27 @@
-<table class="table table-bordered table-hover">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">DNI</th>
-      <th scope="col">Nombres</th>
-      <th scope="col">Apellidos</th>
-      <th scope="col">Celular</th>
-      <th scope="col">Correo</th>
-      <th scope="col">Incidente</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let usuario of usuarios, let i = index">
-      <th scope="col">{{usuario.dni}}</th>
-      <th scope="col">{{usuario.name}}</th>
-      <th scope="col">{{usuario.last}}</th>
-      <th scope="col">{{usuario.celular}}</th>
-      <th scope="col">{{usuario.email}}</th>
-      <th scope="col">{{usuario.title}}</th>
-  </tbody>
-</table>
+<app-loader *ngIf="loading"></app-loader>
+<div *ngIf="!loading">
+  <button type="button" (click)="exportAsXLSX()" class="btn btn-outline-success mb-4">Exportar a Excel</button>
+
+  <table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">DNI</th>
+        <th scope="col">Nombres</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Celular</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Incidente</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios, let i = index">
+        <th scope="col">{{usuario.dni}}</th>
+        <th scope="col">{{usuario.name}}</th>
+        <th scope="col">{{usuario.last}}</th>
+        <th scope="col">{{usuario.celular}}</th>
+        <th scope="col">{{usuario.email}}</th>
+        <th scope="col">{{usuario.title}}</th>
+    </tbody>
+  </table>
+
+</div>

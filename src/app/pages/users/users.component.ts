@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users.service';
+import { ExcelService } from '../../services/excel.service';
 
 @Component({
   selector: 'app-users',
@@ -7,15 +8,20 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  usuarios =[];
-  constructor(private usersService: UsersService) {
+  loading:boolean = true
+  usuarios = [];
+  constructor(private usersService: UsersService, private excelService: ExcelService) {
   }
 
   ngOnInit() {
     this.usersService.getUsers().subscribe(res => {
       this.usuarios = res;
-      console.log(res)
+      this.loading = false;
     });
+  }
+
+  exportAsXLSX = () => {
+    this.excelService.exportAsExcelFile(this.usuarios, 'users');
   }
 
 }

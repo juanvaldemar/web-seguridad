@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Incidente } from "src/app/models/Incidente.class";
 import { IncidentesService } from "src/app/services/incidentes.service";
 
 @Component({
@@ -8,10 +7,20 @@ import { IncidentesService } from "src/app/services/incidentes.service";
   styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
+  loading: boolean = true;
+  categorias = [
+    "Todas",
+    "Incendio",
+    "Asalto",
+    "Secuestro",
+    "Prostitución",
+    "Asesinato"
+  ];
+  categoriaSeleccionada = 'Todas'
   lat: number = -12.085253949;
   lng: number = -77.09379897;
-  incidentes =[];
-  infoWindowOpen:boolean= false;
+  incidentes = [];
+  infoWindowOpen: boolean = false;
 
   constructor(private incidentesService: IncidentesService) {
     this.incidentes = [];
@@ -20,7 +29,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.incidentesService.getIncidentes2().subscribe(res => {
       this.incidentes = res;
-      console.log(res)
+      this.loading = false;
     });
   }
 
@@ -33,7 +42,11 @@ export class HomeComponent implements OnInit {
   //   );
   // }
 
-  markerClick = (indice) => {
-    console.log(indice)
+  filterBy = (value) => {
+    console.log(value)
   }
+
+  markerClick = indice => {
+    console.log(indice);
+  };
 }
