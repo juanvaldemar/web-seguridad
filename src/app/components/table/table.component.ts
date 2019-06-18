@@ -7,13 +7,25 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TableComponent implements OnInit {
   @Input() arrayIncidentes = [];
-  constructor() { }
+  latitude: number;
+  longitude: number;
+  title: String;
+  description: String;
+  constructor() {
+    this.latitude = 0;
+    this.longitude = 0;
+    this.title = '';
+    this.description= '';
+  }
 
   ngOnInit() {
   }
 
-  openMapModal(latitud, longitud){
-
+  openMapModal(incidente) {
+    this.latitude = incidente.latitud;
+    this.longitude = incidente.longitud;
+    this.title = incidente.categoria;
+    this.description = incidente.descripcion;
   }
 
 }

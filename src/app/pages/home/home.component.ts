@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   infoWindowOpen: boolean = false;
   infoWindowOpened = null;
   previousInfoWindow = null;
+  imgSelected = '';
 
   constructor(private incidentesService: IncidentesService) {
     this.incidentes = [];

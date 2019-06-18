@@ -11,23 +11,39 @@
   <div class='mapContainer'>
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]=12>
       <agm-marker *ngFor="let incidente of incidentes; let i = index" (markerClick)='markerClick(infoWindow)'
-        [latitude]="incidente.latitud" [longitude]="incidente.longitud"
-        [iconUrl] ="{url: incidente.categoria === 'Asesinato' ? '../../../assets/images/asesinato.png' :
+        [latitude]="incidente.latitud" [longitude]="incidente.longitud" [iconUrl]="{url: incidente.categoria === 'Asesinato' ? '../../../assets/images/asesinato.png' :
                           incidente.categoria === 'Secuestro' ? '../../../assets/images/secuestro.png' :
                           incidente.categoria === 'Asalto' ? '../../../assets/images/asalto.png' :
                           incidente.categoria === 'Incendio' ? '../../../assets/images/incendio.png' :
-                          incidente.categoria === 'Prostitución' ? '../../../assets/images/prostitucion.png' : null}"
-        >
+                          incidente.categoria === 'Prostitución' ? '../../../assets/images/prostitucion.png' : null}">
         <agm-info-window [isOpen]="infoWindowOpen" #infoWindow>
-          <h5>{{incidente.categoria}}</h5>
-          <p>{{incidente.descripcion}}</p>
-          <img style="height: 100px; margin: auto;" class="my-2" *ngIf="incidente.image" [src]="incidente.image" [alt]="incidente.descripcion">
-          <div>
-            <button type="button" class="btn btn-success btn-sm btn-block">Atender</button>
-            <button type="button" class="btn btn-primary btn-sm btn-block">Finalizar</button>
+          <div class="d-flex flex-column">
+            <h5>{{incidente.categoria}}</h5>
+            <p>{{incidente.descripcion}}</p>
+            <img style="height: 100px; margin: auto;" class="my-2 align-self-center" *ngIf="incidente.image"
+              [src]="incidente.image" data-toggle="modal" data-target="#exampleModalCenter" (click)="imgSelected = incidente.image" [alt]="incidente.descripcion">
+            <div>
+              <button type="button" class="btn btn-success btn-sm btn-block">Atender</button>
+              <button type="button" class="btn btn-primary btn-sm btn-block">Finalizar</button>
+            </div>
           </div>
+
         </agm-info-window>
       </agm-marker>
     </agm-map>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body d-flex justify-content-center">
+        <img style="height: 70vh;" [src]="imgSelected" alt="">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
   </div>
 </div>

@@ -4,7 +4,7 @@
       <th scope="col">#</th>
       <th scope="col">Categoría</th>
       <th scope="col">Descripción</th>
-      <th scope="col">Imagen</th>
+      <th scope="col">Recurso</th>
       <th scope="col">Ubicación</th>
     </tr>
   </thead>
@@ -14,15 +14,40 @@
       <td scope="col">{{incidente.categoria}}</td>
       <td scope="col">{{incidente.descripcion}}</td>
       <td scope="col">
-        <a target="_blank" [href]="incidente.imagen"
-          style="cursor: pointer; text-decoration: underline">{{incidente.imagen}}</a>
+        <a style="cursor: pointer; text-decoration: underline">Ver recurso</a>
       </td>
       <td scope="col">
-        <a target="_blank" (click)="openMapModal(incidente.latitud, incidente.longitud)"
-          style="cursor: pointer; text-decoration: underline">{{incidente.latitud}},
-          {{incidente.longitud}}</a>
+        <a data-toggle="modal" data-target="#exampleModalCenter"
+          (click)="openMapModal(incidente)"
+          style="cursor: pointer; text-decoration: underline">Ver mapa</a>
 
       </td>
   </tbody>
 </table>
 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">{{title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body d-flex flex-column align-items-center">
+        <p class="align-self-start">{{description}}</p>
+        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]=15>
+          <agm-marker [latitude]="latitude" [longitude]="longitude">
+
+          </agm-marker>
+        </agm-map>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
