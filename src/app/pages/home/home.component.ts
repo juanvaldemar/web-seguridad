@@ -15,21 +15,21 @@ export class HomeComponent implements OnInit {
     "Prostitución",
     "Asesinato"
   ];
-  categoriaSeleccionada = 'Todas'
+  categoriaSeleccionada = "Todas";
   lat: number = -12.085253949;
   lng: number = -77.09379897;
   incidentes = [];
   infoWindowOpen: boolean = false;
+  infoWindowOpened = null;
+  previousInfoWindow = null;
 
   constructor(private incidentesService: IncidentesService) {
     this.incidentes = [];
   }
 
   ngOnInit() {
-    this.filterBy(null)
+    this.filterBy(null);
   }
-
-
 
   // obtenerIncidentes() {
   //   this.incidentesService.getIncidentes().subscribe(
@@ -40,15 +40,22 @@ export class HomeComponent implements OnInit {
   //   );
   // }
 
-  filterBy = (value) => {
-    value === 'Todas' ? value = null : null;
+  filterBy = value => {
+    value === "Todas" ? (value = null) : null;
     this.incidentesService.getIncidentes2(value).subscribe(res => {
       this.incidentes = res;
       this.loading = false;
     });
+  };
+
+  markerClick = (infoWindow) => {
+    if (this.previousInfoWindow == null) {
+      this.previousInfoWindow = infoWindow;
+    } else {
+      this.infoWindowOpened = infoWindow;
+      this.previousInfoWindow.close();
+    }
+    this.previousInfoWindow = infoWindow;
   }
 
-  markerClick = indice => {
-    console.log(indice);
-  };
 }

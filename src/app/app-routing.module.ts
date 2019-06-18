@@ -6,6 +6,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { IncidentesComponent } from './pages/incidentes/incidentes.component';
 import { ResueltosComponent } from './pages/incidentes/resueltos/resueltos.component';
 import { EnProgresoComponent } from './pages/incidentes/en-progreso/en-progreso.component';
+import { PendientesComponent } from './pages/incidentes/pendientes/pendientes.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +21,10 @@ const routes: Routes = [
       {
         path: 'enProgreso',
         component: EnProgresoComponent
+      },
+      {
+        path: 'pendientes',
+        component: PendientesComponent
       }
     ]
   },

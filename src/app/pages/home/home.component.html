@@ -10,7 +10,7 @@
   </div>
   <div class='mapContainer'>
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]=12>
-      <agm-marker *ngFor="let incidente of incidentes; let i = index" (markerClick)='markerClick(i)'
+      <agm-marker *ngFor="let incidente of incidentes; let i = index" (markerClick)='markerClick(infoWindow)'
         [latitude]="incidente.latitud" [longitude]="incidente.longitud"
         [iconUrl] ="{url: incidente.categoria === 'Asesinato' ? '../../../assets/images/asesinato.png' :
                           incidente.categoria === 'Secuestro' ? '../../../assets/images/secuestro.png' :
@@ -18,13 +18,13 @@
                           incidente.categoria === 'Incendio' ? '../../../assets/images/incendio.png' :
                           incidente.categoria === 'Prostitución' ? '../../../assets/images/prostitucion.png' : null}"
         >
-        <agm-info-window [isOpen]="infoWindowOpen">
+        <agm-info-window [isOpen]="infoWindowOpen" #infoWindow>
           <h5>{{incidente.categoria}}</h5>
           <p>{{incidente.descripcion}}</p>
           <img class="my-2" *ngIf="incidente.image" [src]="incidente.image" [alt]="incidente.descripcion">
           <div>
             <button type="button" class="btn btn-success btn-sm btn-block">Atender</button>
-            <button type="button" class="btn btn-secondary btn-sm btn-block">Aceptar</button>
+            <button type="button" class="btn btn-primary btn-sm btn-block">Finalizar</button>
           </div>
         </agm-info-window>
       </agm-marker>
