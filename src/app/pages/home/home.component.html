@@ -21,7 +21,7 @@
         <agm-info-window [isOpen]="infoWindowOpen" #infoWindow>
           <h5>{{incidente.categoria}}</h5>
           <p>{{incidente.descripcion}}</p>
-          <img class="my-2" *ngIf="incidente.image" [src]="incidente.image" [alt]="incidente.descripcion">
+          <img style="height: 100px; margin: auto;" class="my-2" *ngIf="incidente.image" [src]="incidente.image" [alt]="incidente.descripcion">
           <div>
             <button type="button" class="btn btn-success btn-sm btn-block">Atender</button>
             <button type="button" class="btn btn-primary btn-sm btn-block">Finalizar</button>

@@ -14,9 +14,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { UsersComponent } from './pages/users/users.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { IncidentesComponent } from './pages/incidentes/incidentes.component';
-import { ResueltosComponent } from './pages/incidentes/resueltos/resueltos.component';
-import { EnProgresoComponent } from './pages/incidentes/en-progreso/en-progreso.component';
-import { PendientesComponent } from './pages/incidentes/pendientes/pendientes.component';
+import { TableComponent } from './components/table/table.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,9 +24,7 @@ import { PendientesComponent } from './pages/incidentes/pendientes/pendientes.co
     UsersComponent,
     LoaderComponent,
     IncidentesComponent,
-    ResueltosComponent,
-    EnProgresoComponent,
-    PendientesComponent
+    TableComponent
   ],
   imports: [
     BrowserModule,

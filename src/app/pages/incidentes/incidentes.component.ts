@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IncidentesService } from 'src/app/services/incidentes.service';
 
 @Component({
   selector: 'app-incidentes',
@@ -7,9 +8,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IncidentesComponent implements OnInit {
 
-  constructor() { }
+  loading;
+  incidentes;
+  constructor(private incidentesService: IncidentesService) {
+    this.loading = true;
+    this.incidentes = [];
+   }
 
   ngOnInit() {
+    this.filterBy(1)
   }
+
+  filterBy = value => {
+    value === "Todas" ? (value = null) : null;
+    this.incidentesService.getIncidentes2('estado', value).subscribe(res => {
+      this.incidentes = res;
+      this.loading = false;
+    });
+  };
+
 
 }

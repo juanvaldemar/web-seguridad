@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
 
   filterBy = value => {
     value === "Todas" ? (value = null) : null;
-    this.incidentesService.getIncidentes2(value).subscribe(res => {
+    this.incidentesService.getIncidentes2('categoria', value).subscribe(res => {
       this.incidentes = res;
       this.loading = false;
     });

@@ -15,11 +15,11 @@ export class IncidentesService {
 
   constructor(private http: HttpClient, private db: AngularFireDatabase) {}
 
-  getIncidentes2 = (tipoCategoria) => {
-    return tipoCategoria
+  getIncidentes2 = (campo, valor) => {
+    return valor
       ? this.db
           .list("Incidentes", ref =>
-            ref.orderByChild("categoria").equalTo(tipoCategoria)
+            ref.orderByChild(campo).equalTo(valor)
           )
           .valueChanges()
       : this.db.list("Incidentes").valueChanges();

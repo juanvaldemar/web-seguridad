@@ -1,8 +1,21 @@
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" [routerLink]="['pendientes']" routerLinkActive="router-link-active"  role="tab" aria-controls="nav-profile" aria-selected="false">Por atender</a>
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" [routerLink]="['enProgreso']" routerLinkActive="router-link-active"  role="tab" aria-controls="nav-home" aria-selected="true">En progreso</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" [routerLink]="['resueltos']" routerLinkActive="router-link-active"  role="tab" aria-controls="nav-profile" aria-selected="false">Resueltos</a>
+    <a class="nav-item nav-link active" data-toggle="tab" role="tab" aria-controls="nav-home"
+      aria-selected="true" (click)="filterBy(1)">Por atender</a>
+    <a class="nav-item nav-link " data-toggle="tab" role="tab"
+      aria-controls="nav-profile" aria-selected="false" (click)="filterBy(2)">En progreso</a>
+    <a class="nav-item nav-link" data-toggle="tab" role="tab" aria-controls="nav-profile"
+      aria-selected="false" (click)="filterBy(3)">Resueltos</a>
   </div>
 </nav>
-<router-outlet></router-outlet>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <app-table [arrayIncidentes]="incidentes"></app-table>
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+    <app-table [arrayIncidentes]="incidentes"></app-table>
+  </div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+    <app-table [arrayIncidentes]="incidentes"></app-table>
+  </div>
+</div>
