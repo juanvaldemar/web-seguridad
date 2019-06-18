@@ -13,13 +13,19 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { UsersComponent } from './pages/users/users.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { IncidentesComponent } from './pages/incidentes/incidentes.component';
+import { ResueltosComponent } from './pages/incidentes/resueltos/resueltos.component';
+import { EnProgresoComponent } from './pages/incidentes/en-progreso/en-progreso.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ExportComponent,
     UsersComponent,
-    LoaderComponent
+    LoaderComponent,
+    IncidentesComponent,
+    ResueltosComponent,
+    EnProgresoComponent
   ],
   imports: [
     BrowserModule,

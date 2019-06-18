@@ -21,10 +21,10 @@
         <agm-info-window [isOpen]="infoWindowOpen">
           <h5>{{incidente.categoria}}</h5>
           <p>{{incidente.descripcion}}</p>
-          <!-- <img *ngIf="incidente.image" [src]="incidente.image" alt=""> -->
+          <img class="my-2" *ngIf="incidente.image" [src]="incidente.image" [alt]="incidente.descripcion">
           <div>
-            <button type="button" class="btn btn-primary btn-sm">Aceptar</button>
-            <button type="button" class="btn btn-danger btn-sm">Cancelar</button>
+            <button type="button" class="btn btn-success btn-sm btn-block">Atender</button>
+            <button type="button" class="btn btn-secondary btn-sm btn-block">Aceptar</button>
           </div>
         </agm-info-window>
       </agm-marker>
