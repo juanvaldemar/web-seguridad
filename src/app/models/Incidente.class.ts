@@ -6,6 +6,7 @@ export class Incidente {
     public latitud: number,
     public longitud: number,
     public image: string,
+    public estado: number,
     public id?: string,
   ) { }
 

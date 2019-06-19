@@ -32,18 +32,10 @@ export class HomeComponent implements OnInit {
     this.filterBy(null);
   }
 
-  // obtenerIncidentes() {
-  //   this.incidentesService.getIncidentes().subscribe(
-  //     res => (this.incidentes = res),
-  //     error => {
-  //       console.log(error);
-  //     }
-  //   );
-  // }
-
   filterBy = value => {
     value === "Todas" ? (value = null) : null;
     this.incidentesService.getIncidentes2('categoria', value).subscribe(res => {
+      console.log(res)
       this.incidentes = res;
       this.loading = false;
     });
@@ -57,6 +49,10 @@ export class HomeComponent implements OnInit {
       this.previousInfoWindow.close();
     }
     this.previousInfoWindow = infoWindow;
+  }
+
+  updateIncidente = (key, estado) => {
+    this.incidentesService.updateItem(key, estado);
   }
 
 }

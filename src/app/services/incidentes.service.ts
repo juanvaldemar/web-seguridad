@@ -9,39 +9,32 @@ import { AngularFireDatabase } from "@angular/fire/database";
   providedIn: "root"
 })
 export class IncidentesService {
-  // configUrl = "https://seguridadciudadana-5ba3d.firebaseio.com";
 
   incidentes: Incidente[];
 
-  constructor(private http: HttpClient, private db: AngularFireDatabase) {}
+  constructor(private http: HttpClient, private db: AngularFireDatabase) {
+  }
 
   getIncidentes2 = (campo, valor) => {
     return valor
       ? this.db
-          .list("Incidentes", ref =>
-            ref.orderByChild(campo).equalTo(valor)
+        .list("Incidentes", ref =>
+          ref.orderByChild(campo).equalTo(valor)
+        )
+        .snapshotChanges().pipe(
+          map(changes =>
+            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
           )
-          .valueChanges()
-      : this.db.list("Incidentes").valueChanges();
-  };
+        )
+      : this.db.list("Incidentes").snapshotChanges().pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      );
+  }
 
-  // getIncidentes = () => {
-  //   return this.http
-  //     .get(`${this.configUrl}/Incidentes.json`)
-  //     .pipe(map(this.converToArray));
-  // };
+  updateItem(key: string, newState: number) {
+    this.db.list("Incidentes").update(key, { estado: newState });
+  }
 
-  // converToArray = (incidentes: object) => {
-  //   if (incidentes === null) {
-  //     return [];
-  //   }
-  //   const arrayIncidentes: Incidente[] = [];
-  //   Object.keys(incidentes).forEach(value => {
-  //     const incidente: Incidente = incidentes[value];
-  //     incidente.id = value;
-  //     arrayIncidentes.push(incidente);
-  //   });
-  //   console.log(arrayIncidentes);
-  //   return arrayIncidentes;
-  // };
 }
