@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IncidentesService } from 'src/app/services/incidentes.service';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-incidentes',
@@ -10,10 +11,10 @@ export class IncidentesComponent implements OnInit {
 
   loading;
   incidentes;
-  constructor(private incidentesService: IncidentesService) {
+  constructor(private incidentesService: IncidentesService, private excelService: ExcelService) {
     this.loading = true;
     this.incidentes = [];
-   }
+  }
 
   ngOnInit() {
     this.filterBy(1)
@@ -27,5 +28,8 @@ export class IncidentesComponent implements OnInit {
     });
   };
 
+  exportAsXLSX = () => {
+    this.excelService.exportAsExcelFile(this.incidentes, 'incidentes');
+  }
 
 }
