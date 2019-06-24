@@ -32,4 +32,12 @@ export class IncidentesComponent implements OnInit {
     this.excelService.exportAsExcelFile(this.incidentes, 'incidentes');
   }
 
+  obteniendoFecha = (fecha) => {
+    console.log('Hola fecha')
+    fecha.datepicker({
+      uiLibrary: 'bootstrap4',
+      locale: 'es-es',
+    });
+  }
+
 }

@@ -15,6 +15,8 @@ import { UsersComponent } from './pages/users/users.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { IncidentesComponent } from './pages/incidentes/incidentes.component';
 import { TableComponent } from './components/table/table.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { TableComponent } from './components/table/table.component';
     UsersComponent,
     LoaderComponent,
     IncidentesComponent,
-    TableComponent
+    TableComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
