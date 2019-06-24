@@ -8,7 +8,7 @@
           <div class="form-group">
             <div class="input-group">
               <input class="form-control" placeholder="yyyy-mm-dd" name="d1" [(ngModel)]="fechaSeleccionada1" ngbDatepicker
-                #d1="ngbDatepicker" style="background-color: white">
+                #d1="ngbDatepicker">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
               </div>
@@ -20,8 +20,8 @@
           <form class="form-inline">
               <div class="form-group">
                 <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="fechaSeleccionada2"
-                    #d2 style="background-color: white">
+                  <input class="form-control" placeholder="yyyy-mm-dd" name="d2" [(ngModel)]="fechaSeleccionada2" ngbDatepicker
+                  #d2="ngbDatepicker">
                   <div class="input-group-append">
                     <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
                   </div>
@@ -30,6 +30,8 @@
             </form>
       </div>
     </div>
+    <button type="button" class="btn btn-outline-success mb-4">Filtrar</button>
+
   </div>
   <div class='col-md-2 d-flex justify-content-end pr-0'>
     <button type="button" (click)="exportAsXLSX()" class="btn btn-outline-success mb-4">Exportar a Excel</button>
