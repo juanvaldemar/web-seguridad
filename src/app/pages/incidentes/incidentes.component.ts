@@ -1,18 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { IncidentesService } from 'src/app/services/incidentes.service';
 import { ExcelService } from 'src/app/services/excel.service';
-declare var jQuery:any;
-declare var $:any;
+import {NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-incidentes',
   templateUrl: './incidentes.component.html',
-  styleUrls: ['./incidentes.component.css']
+  styleUrls: ['./incidentes.component.css'],
+  providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
 })
 export class IncidentesComponent implements OnInit {
 
   loading;
   incidentes;
+  fechaSeleccionada1: Date;
+  fechaSeleccionada2: Date;
+
   constructor(private incidentesService: IncidentesService, private excelService: ExcelService) {
     this.loading = true;
     this.incidentes = [];
@@ -20,6 +23,10 @@ export class IncidentesComponent implements OnInit {
 
   ngOnInit() {
     this.filterBy(1)
+  }
+
+  get today() {
+    return new Date();
   }
 
   filterBy = value => {
@@ -52,10 +59,5 @@ export class IncidentesComponent implements OnInit {
     this.excelService.exportAsExcelFile(this.incidentes, 'incidentes');
   }
 
-  obteniendoFecha = () => {
-    $('#datepicker').datepicker({
-      uiLibrary: 'bootstrap4'
-  });
-  }
 
 }

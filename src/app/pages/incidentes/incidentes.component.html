@@ -1,28 +1,35 @@
 <div class='row w-100'>
-  <div class=" form-inline form-group col-md-3 pl-0">
-    <!-- <label for="inputPassword" class="ml-0 col-md-4 col-form-label">Incidentes:</label>
-    <select class="form-control col-md-5" id="categoria" [(ngModel)]="categoriaSeleccionada" name="categoria"
-      #categoria="ngModel" (change)="filterBy($event.target.value)">
-      <option *ngFor="let categoria of categorias" [value]="categoria">{{categoria}}</option>
-    </select> -->
-  </div>
-  <div class="col-md-7">
+
+  <div class="col-md-10">
     <div class="row d-flex align-items-center">
       <p>Filtrar por fecha:</p>
       <div class="col">
-          <input id="datepicker" width="276" />
+        <form class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="d1" [(ngModel)]="fechaSeleccionada1" ngbDatepicker
+                #d1="ngbDatepicker" style="background-color: white">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="col">
-        <div class="input-group mb-2">
-          <div class="input-group-prepend">
-            <div class="input-group-text" style="cursor: pointer" #fecFin (click)="obteniendoFecha(fecFin)">@</div>
-          </div>
-          <input type="text" class="form-control" id="inlineFormInputGroup" style="background-color: white" placeholder="Fecha fin" disabled>
-        </div>
+          <form class="form-inline">
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="fechaSeleccionada2"
+                    #d2 style="background-color: white">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
+                  </div>
+                </div>
+              </div>
+            </form>
       </div>
     </div>
-
-
   </div>
   <div class='col-md-2 d-flex justify-content-end pr-0'>
     <button type="button" (click)="exportAsXLSX()" class="btn btn-outline-success mb-4">Exportar a Excel</button>
