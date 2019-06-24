@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
   infoWindowOpened = null;
   previousInfoWindow = null;
   imgSelected = '';
+  incidenteSeleccionado = {};
+  comentario = '';
 
   constructor(private incidentesService: IncidentesService) {
     this.incidentes = [];
@@ -51,8 +53,13 @@ export class HomeComponent implements OnInit {
     this.previousInfoWindow = infoWindow;
   }
 
-  updateIncidente = (key, estado) => {
-    this.incidentesService.updateItem(key, estado);
+  updateIncidente = (incidente, estado) => {
+    this.incidenteSeleccionado = incidente;
+    this.incidentesService.updateItem(incidente.key, { estado });
+  }
+
+  addComent = () => {
+    this.incidentesService.updateItem(this.incidenteSeleccionado['key'], { comentario: this.comentario });
   }
 
 }

@@ -33,8 +33,8 @@ export class IncidentesService {
       );
   }
 
-  updateItem(key: string, newState: number) {
-    this.db.list("Incidentes").update(key, { estado: newState });
+  updateItem(key: string, newBody) {
+    this.db.list("Incidentes").update(key, newBody);
   }
 
 }

@@ -7,6 +7,7 @@ export class Incidente {
     public longitud: number,
     public image: string,
     public estado: number,
+    public fechaRegistro: any,
     public id?: string,
   ) { }
 
