@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IncidentesService } from 'src/app/services/incidentes.service';
 import { ExcelService } from 'src/app/services/excel.service';
+declare var jQuery:any;
+declare var $:any;
 
 @Component({
   selector: 'app-incidentes',
@@ -50,12 +52,10 @@ export class IncidentesComponent implements OnInit {
     this.excelService.exportAsExcelFile(this.incidentes, 'incidentes');
   }
 
-  obteniendoFecha = (fecha) => {
-    console.log('Hola fecha')
-    fecha.datepicker({
-      uiLibrary: 'bootstrap4',
-      locale: 'es-es',
-    });
+  obteniendoFecha = () => {
+    $('#datepicker').datepicker({
+      uiLibrary: 'bootstrap4'
+  });
   }
 
 }

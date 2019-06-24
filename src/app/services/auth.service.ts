@@ -20,6 +20,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    this.userToken = ''
   }
 
   login( employee: Employee ) {
