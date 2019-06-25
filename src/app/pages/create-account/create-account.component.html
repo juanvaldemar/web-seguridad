@@ -5,7 +5,7 @@
         <div class="card">
           <div class="card-header">Registro de cuentas</div>
           <div class="card-body">
-            <form name="my-form" action="success.php" method="">
+            <form (ngSubmit)="createEmployee()" #form="ngForm" name="my-form">
 
               <div class="form-group row">
                 <label for="user_name" class="col-md-4 col-form-label text-md-right">Nombres</label>
@@ -36,9 +36,9 @@
               </div>
 
               <div class="form-group row">
-                <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Dirección</label>
+                <label for="password" class="col-md-4 col-form-label text-md-right">Contraseña</label>
                 <div class="col-md-6">
-                  <input type="text" id="permanent_address" class="form-control" name="permanent-address">
+                  <input type="password" id="password" class="form-control" name="password">
                 </div>
               </div>
 

@@ -15,7 +15,8 @@ export class IncidentesService {
   constructor(private http: HttpClient, private db: AngularFireDatabase) {
   }
 
-  getIncidentes2 = (campo, valor) => {
+  getIncidentes2 = (campo, valor, fechaInicio?, fechaFin?) => {
+
     return valor
       ? this.db
         .list("Incidentes", ref =>
@@ -23,7 +24,17 @@ export class IncidentesService {
         )
         .snapshotChanges().pipe(
           map(changes =>
-            changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+            changes.map(c => {
+              let cPayloadVal = c.payload.val();
+              if (fechaInicio && fechaFin) {
+                let time = cPayloadVal['fechaRegistro'].time;
+                if (fechaInicio <= time && time <= fechaFin) {
+                  return { key: c.payload.key, ...cPayloadVal }
+                };
+              } else {
+                return { key: c.payload.key, ...cPayloadVal }
+              }
+            })
           )
         )
       : this.db.list("Incidentes").snapshotChanges().pipe(

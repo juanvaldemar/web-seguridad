@@ -2,8 +2,8 @@
 
   <div class="col-md-10">
     <div class="row d-flex align-items-center">
-      <p>Filtrar por fecha:</p>
-      <div class="col">
+      <p class="col-2">Filtrar por fecha:</p>
+      <div class="col-4">
         <form class="form-inline">
           <div class="form-group">
             <div class="input-group">
@@ -16,7 +16,7 @@
           </div>
         </form>
       </div>
-      <div class="col">
+      <div class="col-4">
           <form class="form-inline">
               <div class="form-group">
                 <div class="input-group">
@@ -30,7 +30,7 @@
             </form>
       </div>
     </div>
-    <button type="button" class="btn btn-outline-success mb-4">Filtrar</button>
+    <button type="button" class="btn btn-outline-success mb-4 col-1" (click)="filterBy(1,fechaSeleccionada1, fechaSeleccionada2)">Filtrar</button>
 
   </div>
   <div class='col-md-2 d-flex justify-content-end pr-0'>

@@ -19,4 +19,9 @@ export class UsersService {
           .valueChanges()
       : this.db.list("Users").valueChanges();
   };
+
+  save(newEmployee) {
+    this.db.object('Employees').set(newEmployee);
+  }
+
 }

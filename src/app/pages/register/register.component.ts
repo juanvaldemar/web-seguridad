@@ -17,9 +17,6 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem('token')) {
-      this.router.navigateByUrl('/home');
-    }
   }
 
   onSubmit( form: NgForm ) {
