@@ -1,44 +1,70 @@
 <main class="my-form">
-  <div class="cotainer">
+  <div *ngIf="saveUserSuccess" class="alert alert-success" role="alert">
+    Cuenta creada correctamente
+  </div>
+  <div *ngIf="!saveUserSuccess" class="cotainer">
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
           <div class="card-header">Registro de cuentas</div>
           <div class="card-body">
-            <form (ngSubmit)="createEmployee()" #form="ngForm" name="my-form">
-
+            <form (ngSubmit)="createEmployee(form); form.reset()" #form="ngForm" name="my-form">
+              <span
+                *ngIf="form.submitted && form.controls['username'].errors && form.controls['username'].errors.required"
+                class="text-danger">El nombre es obligatorio</span>
               <div class="form-group row">
                 <label for="user_name" class="col-md-4 col-form-label text-md-right">Nombres</label>
                 <div class="col-md-6">
-                  <input type="text" id="user_name" class="form-control" name="username">
+                  <input type="text" id="username" class="form-control" name="username" [(ngModel)]="employee.name"
+                    required>
                 </div>
               </div>
-
+              <span
+                *ngIf="form.submitted && form.controls['lastname'].errors && form.controls['lastname'].errors.required"
+                class="text-danger">El apellido es obligatorio</span>
               <div class="form-group row">
                 <label for="lastName" class="col-md-4 col-form-label text-md-right">Apellidos</label>
                 <div class="col-md-6">
-                  <input type="text" id="lastName" class="form-control" name="lastName">
+                  <input type="text" id="lastname" class="form-control" name="lastname" [(ngModel)]="employee.lastname"
+                    required>
                 </div>
               </div>
+              <span *ngIf="form.submitted && form.controls['email'].errors && form.controls['email'].errors.required"
+                class="text-danger">El correo es obligatorio</span>
+              <span *ngIf="form.submitted && form.controls['email'].errors && form.controls['email'].errors.email"
+                class="text-danger">El correo debe ser válido</span>
 
               <div class="form-group row">
-                <label for="email_address" class="col-md-4 col-form-label text-md-right">Correo</label>
+                <label for="email" class="col-md-4 col-form-label text-md-right">Correo</label>
                 <div class="col-md-6">
-                  <input type="text" id="email_address" class="form-control" name="email-address">
+                  <input type="email" id="email" class="form-control" name="email" [(ngModel)]="employee.email" email
+                    required>
                 </div>
               </div>
-
-              <div class="form-group row">
-                <label for="phone_number" class="col-md-4 col-form-label text-md-right">Celular</label>
-                <div class="col-md-6">
-                  <input type="text" id="phone_number" class="form-control">
-                </div>
-              </div>
+              <span
+                *ngIf="form.submitted && form.controls['password'].errors && form.controls['password'].errors.required"
+                class="text-danger">La contraseña es obligatorio</span>
+              <span
+                *ngIf="form.submitted && form.controls['password'].errors && form.controls['password'].errors.minlength"
+                class="text-danger">La contraseña debe tener un mínimo de 6 caracteres</span>
 
               <div class="form-group row">
                 <label for="password" class="col-md-4 col-form-label text-md-right">Contraseña</label>
                 <div class="col-md-6">
-                  <input type="password" id="password" class="form-control" name="password">
+                  <input type="password" id="password" class="form-control" name="password"
+                    [(ngModel)]="employee.password" required minlength="6">
+                </div>
+              </div>
+              <span *ngIf="form.submitted && form.controls['type'].errors && form.controls['type'].errors.required"
+                class="text-danger">El cargo es obligatorio</span>
+              <div class="form-group row">
+                <label for="password" class="col-md-4 col-form-label text-md-right">Cargo</label>
+                <div class="col-md-6">
+
+                  <select class="form-control" id="type" required [(ngModel)]="employee.type" name="type"
+                    #type="ngModel">
+                    <option *ngFor="let cargo of cargos" [value]="cargo">{{cargo}}</option>
+                  </select>
                 </div>
               </div>
 

@@ -21,7 +21,7 @@ export class UsersService {
   };
 
   save(newEmployee) {
-    this.db.object('Employees').set(newEmployee);
+    return this.db.list('Employees').push(newEmployee);
   }
 
 }

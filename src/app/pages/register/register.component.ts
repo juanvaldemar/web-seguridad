@@ -12,24 +12,24 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegisterComponent implements OnInit {
   employee: Employee;
   recordarme = false;
-  constructor( private auth: AuthService,private router: Router) {
+  constructor(private auth: AuthService, private router: Router) {
     this.employee = new Employee();
   }
 
   ngOnInit() {
   }
 
-  onSubmit( form: NgForm ) {
+  onSubmit(form: NgForm) {
 
-    if ( form.invalid ) { return; }
+    if (form.invalid) { return; }
 
-    this.auth.nuevoemployee( this.employee )
-      .subscribe( resp => {
+    this.auth.nuevoemployee(this.employee)
+      .subscribe(resp => {
 
         console.log(resp);
 
 
-        if ( this.recordarme ) {
+        if (this.recordarme) {
           localStorage.setItem('email', this.employee.email);
         }
 
