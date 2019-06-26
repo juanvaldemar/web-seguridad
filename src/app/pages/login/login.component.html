@@ -1,41 +1,42 @@
 <div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100 p-t-50 p-b-90">
-            <form (ngSubmit)="login(form)" #form="ngForm" class="login100-form validate-form flex-sb flex-w">
+  <div class="container-login100">
+    <div class="wrap-login100 p-t-50 p-b-90">
+      <form (ngSubmit)="login(form)" #form="ngForm" class="login100-form validate-form flex-sb flex-w">
 
-                <span class="login100-form-title p-b-51">
-                    Login
-                </span>
+        <span class="login100-form-title p-b-51">
+          Login
+        </span>
 
-                <span *ngIf="form.submitted && form.controls['email'].errors && form.controls['email'].errors.required" class="text-danger">El correo es obligatorio</span>
-                <span *ngIf="form.submitted && form.controls['email'].errors && form.controls['email'].errors.email" class="text-danger">Debe ser un correo válido</span>
-                                <div class="wrap-input100 m-b-16">
-                    <input class="input100"
-                           type="email"
-                           name="email"
-                           placeholder="Correo"
-                           [(ngModel)]="employee.email"
-                           required
-                           email>
+        <span *ngIf="form.submitted && form.controls['email'].errors && form.controls['email'].errors.required"
+          class="text-danger">El correo es obligatorio</span>
+        <span *ngIf="form.submitted && form.controls['email'].errors && form.controls['email'].errors.email"
+          class="text-danger">Debe ser un correo válido</span>
+        <div class="wrap-input100 m-b-16">
+          <input class="input100" type="email" name="email" placeholder="Correo" [(ngModel)]="employee.email" required
+            email>
 
-                    <span class="focus-input100"></span>
-                </div>
+          <span class="focus-input100"></span>
+        </div>
 
-                <span *ngIf="form.submitted && form.controls['pass'].errors && form.controls['pass'].errors.required" class="text-danger">La contraseña es obligatoria</span>
-                <span *ngIf="form.submitted && form.controls['pass'].errors && form.controls['pass'].errors.email" class="text-danger">La contraseña debe tener un mínimo de 8 caracteres</span>
+        <span *ngIf="form.submitted && form.controls['pass'].errors && form.controls['pass'].errors.required"
+          class="text-danger">La contraseña es obligatoria</span>
+        <span *ngIf="form.submitted && form.controls['pass'].errors && form.controls['pass'].errors.email"
+          class="text-danger">La contraseña debe tener un mínimo de 8 caracteres</span>
 
-                <div class="wrap-input100 m-b-16" data-validate = "Password is required">
-                    <input class="input100"
-                           type="password"
-                           name="pass"
-                           placeholder="Contraseña"
-                           [(ngModel)]="employee.password"
-                           required
-                           minlength="8">
-                    <span class="focus-input100"></span>
-                </div>
+        <div class="wrap-input100 m-b-16" data-validate="Password is required">
+          <input class="input100" type="password" name="pass" placeholder="Contraseña" [(ngModel)]="employee.password"
+            required minlength="8">
+          <span class="focus-input100"></span>
+        </div>
+        <label for="">Seleccionar cargo</label>
+        <div class="wrap-input100 m-b-16" data-validate="Password is required">
+          <select class="input100" id="type" required [(ngModel)]="employee.type" name="type" #type="ngModel">
+            <option *ngFor="let cargo of cargos" [value]="cargo">{{cargo}}</option>
+          </select>
 
-                <!-- <div class="flex-sb-m w-full p-t-3 p-b-24">
+        </div>
+
+        <!-- <div class="flex-sb-m w-full p-t-3 p-b-24">
                     <div class="contact100-form-checkbox">
                         <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
                         <label class="label-checkbox100" for="ckb1">
@@ -50,14 +51,13 @@
                     </div>
                 </div> -->
 
-                <div class="container-login100-form-btn m-t-17">
-                    <button class="login100-form-btn" type="submit">
-                        Ingresar
-                    </button>
-                </div>
-
-            </form>
+        <div class="container-login100-form-btn m-t-17">
+          <button class="login100-form-btn" type="submit">
+            Ingresar
+          </button>
         </div>
-    </div>
-</div>
 
+      </form>
+    </div>
+  </div>
+</div>

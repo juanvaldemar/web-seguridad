@@ -12,6 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
   employee: Employee;
   recordarme = false;
+  cargos = ['Bombero', 'Policía'];
+
   constructor(private auth: AuthService, private router: Router) {
     this.employee = new Employee();
   }
