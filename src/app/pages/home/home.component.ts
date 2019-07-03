@@ -7,14 +7,7 @@ import { IncidentesService } from "src/app/services/incidentes.service";
 })
 export class HomeComponent implements OnInit {
   loading: boolean = true;
-  categorias = [
-    "Todas",
-    "Incendio",
-    "Asalto",
-    "Secuestro",
-    "Prostitución",
-    "Asesinato"
-  ];
+  categorias = [];
   categoriaSeleccionada = "Todas";
   lat: number = -12.085253949;
   lng: number = -77.09379897;
@@ -31,6 +24,16 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    let cargo = localStorage.getItem('cargo');
+    if (cargo === 'Policía') {
+      this.categorias = [
+        "Todas",
+        "Asalto",
+        "Secuestro",
+        "Prostitución",
+        "Asesinato"
+      ];
+    }
     this.filterBy(null);
   }
 

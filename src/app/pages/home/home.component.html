@@ -1,7 +1,7 @@
 <app-loader *ngIf="loading"></app-loader>
 <div *ngIf="!loading">
 
-  <div class=" form-inline form-group col-md-4 mb-4">
+  <div *ngIf="categorias.length>0" class=" form-inline form-group col-md-4 mb-4">
     <label for="inputPassword" class="col-md-3 col-form-label">Categorias</label>
     <select class="form-control col-md-5" id="categoria" [(ngModel)]="categoriaSeleccionada" name="categoria"
       #categoria="ngModel" (change)="filterBy($event.target.value)">

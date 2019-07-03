@@ -28,11 +28,12 @@ export class IncidentesService {
               let cPayloadVal = c.payload.val();
               if (fechaInicio && fechaFin) {
                 let time = cPayloadVal['fechaRegistro'].time;
+                console.log(fechaInicio, fechaFin, time)
                 if (fechaInicio <= time && time <= fechaFin) {
-                  return { key: c.payload.key, ...cPayloadVal }
-                };
+                  return { key: c.payload.key, ...cPayloadVal };
+                }
               } else {
-                return { key: c.payload.key, ...cPayloadVal }
+                return { key: c.payload.key, ...cPayloadVal };
               }
             })
           )

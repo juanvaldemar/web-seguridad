@@ -12,7 +12,7 @@
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['incidentes']">Incidentes</a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
+      <li *ngIf="userService.crearCuentas" class="nav-item" routerLinkActive="active">
         <a class="nav-link" [routerLink]="['crearCuentas']">Crear cuentas</a>
       </li>
     </ul>

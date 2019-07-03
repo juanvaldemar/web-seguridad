@@ -1,53 +1,68 @@
-<div class='row w-100'>
+<div class='row w-100 mb-4'>
+  <div class="col-md-12">
+    <form (ngSubmit)="filtrarPorFecha()" #form="ngForm" class=" row d-flex align-items-center">
+      <div class="col-md-2">
+        <p>Filtrar por fecha:</p>
+      </div>
 
-  <div class="col-md-10">
-    <div class="row d-flex align-items-center">
-      <p class="col-2">Filtrar por fecha:</p>
-      <div class="col-4">
-        <form class="form-inline">
+      <div class="col-md-3">
+        <div class="form-inline">
           <div class="form-group">
             <div class="input-group">
-              <input class="form-control" placeholder="yyyy-mm-dd" name="d1" [(ngModel)]="fechaSeleccionada1" ngbDatepicker
-                #d1="ngbDatepicker">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="d1" [(ngModel)]="fechaSeleccionada1"
+                ngbDatepicker #d1="ngbDatepicker" required>
               <div class="input-group-append">
-                <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
+                <button class="btn btn-outline-secondary calendar" (click)="d1.toggle()" type="button"><i
+                    class="fas fa-calendar-alt"></i></button>
               </div>
             </div>
           </div>
-        </form>
+        </div>
+        <span *ngIf="form.submitted && form.controls['d1'].errors && form.controls['d1'].errors.required"
+          class="text-danger">Ingresar fecha inicial</span>
       </div>
-      <div class="col-4">
-          <form class="form-inline">
-              <div class="form-group">
-                <div class="input-group">
-                  <input class="form-control" placeholder="yyyy-mm-dd" name="d2" [(ngModel)]="fechaSeleccionada2" ngbDatepicker
-                  #d2="ngbDatepicker">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
-                  </div>
-                </div>
+      <div class="col-md-3">
+        <div class="form-inline">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="d2" [(ngModel)]="fechaSeleccionada2"
+                ngbDatepicker #d2="ngbDatepicker" required>
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"><i
+                    class="fas fa-calendar-alt"></i></button>
               </div>
-            </form>
+            </div>
+          </div>
+        </div>
+        <span *ngIf="form.submitted && form.controls['d2'].errors && form.controls['d2'].errors.required"
+          class="text-danger">Ingresar fecha final</span>
       </div>
-    </div>
-    <button type="button" class="btn btn-outline-success mb-4 col-1" (click)="filterBy(1,fechaSeleccionada1, fechaSeleccionada2)">Filtrar</button>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-outline-success">Filtrar</button>
+      </div>
+      <div *ngIf="quitarFiltro" class="col-md-2">
+        <button type="button" class="btn btn-outline-danger" (click)="quitarFiltroFecha(); form.reset()">Quitar Filtro</button>
+      </div>
 
-  </div>
-  <div class='col-md-2 d-flex justify-content-end pr-0'>
-    <button type="button" (click)="exportAsXLSX()" class="btn btn-outline-success mb-4">Exportar a Excel</button>
+
+    </form>
   </div>
 </div>
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" data-toggle="tab" role="tab" aria-selected="true" (click)="filterBy(1)">Por
+    <a class="nav-item nav-link active" data-toggle="tab" role="tab" aria-selected="true" (click)="filtrarPorFecha(1)">Por
       atender</a>
-    <a class="nav-item nav-link " data-toggle="tab" role="tab" aria-selected="false" (click)="filterBy(2)">En
+    <a class="nav-item nav-link " data-toggle="tab" role="tab" aria-selected="false" (click)="filtrarPorFecha(2)">En
       progreso</a>
-    <a class="nav-item nav-link" data-toggle="tab" role="tab" aria-selected="false" (click)="filterBy(3)">Resueltos</a>
+    <a class="nav-item nav-link" data-toggle="tab" role="tab" aria-selected="false" (click)="filtrarPorFecha(3)">Resueltos</a>
   </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
-
+  <div class="row">
+    <div class="col-2 offset-10">
+      <button type="button" (click)="exportAsXLSX()" class="btn btn-outline-success mt-3">Exportar a Excel</button>
+    </div>
+  </div>
   <app-table [arrayIncidentes]="incidentes"></app-table>
 
 </div>

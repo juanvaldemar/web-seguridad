@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IncidentesService } from 'src/app/services/incidentes.service';
 import { ExcelService } from 'src/app/services/excel.service';
 import { NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { visitValue } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-incidentes',
@@ -13,8 +14,10 @@ export class IncidentesComponent implements OnInit {
 
   loading;
   incidentes;
+  valorSeleccionado: number;
   fechaSeleccionada1: Date;
   fechaSeleccionada2: Date;
+  quitarFiltro = false;
 
   constructor(private incidentesService: IncidentesService, private excelService: ExcelService) {
     this.loading = true;
@@ -22,13 +25,15 @@ export class IncidentesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.filterBy(1);
+    this.valorSeleccionado = 1;
+    this.filterBy(this.valorSeleccionado);
   }
 
   filterBy = (value, fechaInicio?, fechaFin?) => {
     value === "Todas" ? (value = null) : null;
     this.incidentesService.getIncidentes2('estado', value, fechaInicio, fechaFin).subscribe(res => {
-      res.forEach((value, index) => {
+      res = res.filter(valor => valor !== undefined)
+      res.forEach(value => {
         if (value) {
           let f = new Date(value['fechaRegistro'].time);
           let hora = [
@@ -47,9 +52,6 @@ export class IncidentesComponent implements OnInit {
           let fecha = `${h[0]}-${h[1]}-${h[2]} ${h[3]}:${h[4]}:${h[5]}`;
           value['fecha'] = fecha;
         }
-        else{
-          res.splice(index, 1)
-        }
       })
       console.log(res)
       this.incidentes = res;
@@ -61,7 +63,28 @@ export class IncidentesComponent implements OnInit {
     this.excelService.exportAsExcelFile(this.incidentes, 'incidentes');
   }
 
-  filtrarPorFecha = () => {
+  filtrarPorFecha = (value?) => {
+    // if (form.invalid) {
+    //   console.log('Completar todos los campos')
+    //   return;
+    // }
+    if (value) {
+      this.valorSeleccionado = value;
+    }
+    if (this.fechaSeleccionada1 && this.fechaSeleccionada2) {
+      this.quitarFiltro = true;
+      console.log(this.valorSeleccionado, this.fechaSeleccionada1, this.fechaSeleccionada2);
+      this.filterBy(this.valorSeleccionado, this.fechaSeleccionada1, this.fechaSeleccionada2);
+    } else {
+      console.log(this.valorSeleccionado, this.fechaSeleccionada1, this.fechaSeleccionada2);
+      this.filterBy(this.valorSeleccionado);
+    }
+  }
 
+  quitarFiltroFecha = () => {
+    this.fechaSeleccionada1 = null;
+    this.fechaSeleccionada2 = null;
+    this.quitarFiltro = false;
+    this.filtrarPorFecha();
   }
 }

@@ -20,7 +20,7 @@
 
         <span *ngIf="form.submitted && form.controls['pass'].errors && form.controls['pass'].errors.required"
           class="text-danger">La contraseña es obligatoria</span>
-        <span *ngIf="form.submitted && form.controls['pass'].errors && form.controls['pass'].errors.email"
+        <span *ngIf="form.submitted && form.controls['pass'].errors && form.controls['pass'].errors.minlength"
           class="text-danger">La contraseña debe tener un mínimo de 8 caracteres</span>
 
         <div class="wrap-input100 m-b-16" data-validate="Password is required">
@@ -29,12 +29,20 @@
           <span class="focus-input100"></span>
         </div>
         <label for="">Seleccionar cargo</label>
+        <span *ngIf="form.submitted && form.controls['type'].errors && form.controls['type'].errors.required"
+          class="text-danger">Seleccionar un cargo</span>
         <div class="wrap-input100 m-b-16" data-validate="Password is required">
           <select class="input100" id="type" required [(ngModel)]="employee.type" name="type" #type="ngModel">
             <option *ngFor="let cargo of cargos" [value]="cargo">{{cargo}}</option>
           </select>
 
         </div>
+          <div *ngIf="errorMessage" class="card">
+            <div class="card-body">
+              {{errorMessage}}
+            </div>
+          </div>
+
 
         <!-- <div class="flex-sb-m w-full p-t-3 p-b-24">
                     <div class="contact100-form-checkbox">
