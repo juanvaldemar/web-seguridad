@@ -27,6 +27,13 @@
               <img style="height: 100px; margin: auto; cursor: pointer;" class="my-2 align-self-center"
                 *ngIf="incidente.image" [src]="incidente.image" data-toggle="modal" data-target="#exampleModalCenter"
                 (click)="imgSelected = incidente.image" [alt]="incidente.descripcion">
+              <video *ngIf="incidente.video" class="my-2 align-self-center" [src]="incidente.video" controls>
+                Tu navegador no implementa el elemento <code>video</code>.
+              </video>
+
+              <audio *ngIf="incidente.audio" class="my-2 align-self-center" [src]="incidente.audio" controls>
+                <p>Tu navegador no implementa el elemento audio.</p>
+              </audio>
               <div>
                 <button *ngIf="incidente.estado == 1" type="button" class="btn btn-success btn-sm btn-block"
                   (click)="updateIncidente(incidente, 2)">Atender</button>
