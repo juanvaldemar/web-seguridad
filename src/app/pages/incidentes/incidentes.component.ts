@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IncidentesService } from 'src/app/services/incidentes.service';
 import { ExcelService } from 'src/app/services/excel.service';
 import { NgbDateAdapter, NgbDateStruct, NgbDateNativeAdapter } from '@ng-bootstrap/ng-bootstrap';
-import { visitValue } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-incidentes',
@@ -18,6 +17,7 @@ export class IncidentesComponent implements OnInit {
   fechaSeleccionada1: Date;
   fechaSeleccionada2: Date;
   quitarFiltro = false;
+  cargo = '';
 
   constructor(private incidentesService: IncidentesService, private excelService: ExcelService) {
     this.loading = true;
@@ -25,18 +25,22 @@ export class IncidentesComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('cargo')) {
+      this.cargo = localStorage.getItem('cargo');
+    } else {
+      this.cargo = 'Administrador';
+    }
     this.valorSeleccionado = 1;
     this.filterBy(this.valorSeleccionado);
   }
 
   filterBy = (value, fechaInicio?, fechaFin?) => {
-    value === "Todas" ? (value = null) : null;
-    this.incidentesService.getIncidentes2('estado', value, fechaInicio, fechaFin).subscribe(res => {
-      res = res.filter(valor => valor !== undefined)
+    this.incidentesService.getIncidentes2('estado', value, this.cargo, fechaInicio, fechaFin).subscribe(res => {
+      res = res.filter(valor => valor !== undefined);
       res.forEach(value => {
         if (value) {
-          let f = new Date(value['fechaRegistro'].time);
-          let hora = [
+          const f = new Date(value['fechaRegistro'].time);
+          const hora = [
             f.getDate(),
             f.getMonth(),
             f.getFullYear(),
@@ -45,15 +49,15 @@ export class IncidentesComponent implements OnInit {
             f.getSeconds()
           ];
 
-          const h = hora.map(value => {
-            return value < 10 ? '0' + value : value;
-          })
+          const h = hora.map(v => {
+            return v < 10 ? '0' + v : v;
+          });
 
-          let fecha = `${h[0]}-${h[1]}-${h[2]} ${h[3]}:${h[4]}:${h[5]}`;
+          const fecha = `${h[0]}-${h[1]}-${h[2]} ${h[3]}:${h[4]}:${h[5]}`;
           value['fecha'] = fecha;
         }
-      })
-      console.log(res)
+      });
+      console.log(res);
       this.incidentes = res;
       this.loading = false;
     });

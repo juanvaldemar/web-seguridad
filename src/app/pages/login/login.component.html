@@ -6,15 +6,13 @@
         <span class="login100-form-title p-b-51">
           Login
         </span>
-
         <span *ngIf="form.submitted && form.controls['email'].errors && form.controls['email'].errors.required"
           class="text-danger">El correo es obligatorio</span>
         <span *ngIf="form.submitted && form.controls['email'].errors && form.controls['email'].errors.email"
           class="text-danger">Debe ser un correo válido</span>
         <div class="wrap-input100 m-b-16">
-          <input class="input100" type="email" name="email" placeholder="Correo" [(ngModel)]="employee.email" required
-            email>
-
+          <input class="input100" type="email" name="email" #email='ngModel' placeholder="Correo"
+            [(ngModel)]="employee.email" required email>
           <span class="focus-input100"></span>
         </div>
 
@@ -28,20 +26,38 @@
             required minlength="8">
           <span class="focus-input100"></span>
         </div>
-        <label for="">Seleccionar cargo</label>
         <span *ngIf="form.submitted && form.controls['type'].errors && form.controls['type'].errors.required"
-          class="text-danger">Seleccionar un cargo</span>
-        <div class="wrap-input100 m-b-16" data-validate="Password is required">
-          <select class="input100" id="type" required [(ngModel)]="employee.type" name="type" #type="ngModel">
-            <option *ngFor="let cargo of cargos" [value]="cargo">{{cargo}}</option>
-          </select>
-
-        </div>
-          <div *ngIf="errorMessage" class="card">
-            <div class="card-body">
-              {{errorMessage}}
-            </div>
+          class="text-danger">Seleccionar tipo de usuario</span>
+        <div class="w-100 mt-2 mb-3">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline1" name="type" [(ngModel)]="employee.type" value="Administrador"
+              class="custom-control-input" required (click)="typeSelected()">
+            <label class="custom-control-label" for="customRadioInline1">Administrador</label>
           </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline2" name="type" [(ngModel)]="employee.type" value="Empleado"
+              class="custom-control-input" required (click)="typeSelected()">
+            <label class="custom-control-label" for="customRadioInline2">Empleado</label>
+          </div>
+        </div>
+        <div *ngIf="employee.type === 'Empleado'" class="w-100">
+          <span *ngIf="form.submitted && position.invalid"
+            class="text-danger">Seleccionar un cargo</span>
+
+          <div class="wrap-input100 m-b-16">
+            <select class="input100" id="position" [(ngModel)]="employee.position" name="position" #position="ngModel"
+              required>
+              <option *ngFor="let cargo of cargos" [value]="cargo">{{cargo}}</option>
+            </select>
+
+          </div>
+        </div>
+
+        <div *ngIf="errorMessage" class="card w-100">
+          <div class="card-body w-100 text-danger text-center">
+            {{errorMessage}}
+          </div>
+        </div>
 
 
         <!-- <div class="flex-sb-m w-full p-t-3 p-b-24">

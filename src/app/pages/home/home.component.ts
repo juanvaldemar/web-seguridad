@@ -18,33 +18,56 @@ export class HomeComponent implements OnInit {
   imgSelected = '';
   incidenteSeleccionado = {};
   comentario = '';
+  cargo: string = '';
 
   constructor(private incidentesService: IncidentesService) {
     this.incidentes = [];
   }
 
   ngOnInit() {
-    let cargo = localStorage.getItem('cargo');
-    if (cargo === 'Policía') {
+    if (localStorage.getItem('cargo')) {
+      this.cargo = localStorage.getItem('cargo');
+      if (this.cargo === 'Policía') {
+        this.categorias = [
+          "Todas",
+          "Asalto",
+          "Secuestro",
+          "Prostitución",
+          "Asesinato"
+        ];
+      }
+      if (this.cargo === 'Bombero') {
+        this.categorias = [
+          "Todas",
+          "Incendio",
+          "Accidente",
+        ];
+      }
+    } else {
+      this.cargo = 'Administrador';
       this.categorias = [
         "Todas",
         "Asalto",
         "Secuestro",
         "Prostitución",
-        "Asesinato"
+        "Asesinato",
+        "Incendio",
+        "Accidente",
+        "Otro"
       ];
     }
+
     this.filterBy(null);
   }
 
   filterBy = value => {
     value === "Todas" ? (value = null) : null;
-    this.incidentesService.getIncidentes2('categoria', value).subscribe(res => {
-      console.log(res)
+    this.incidentesService.getIncidentes2('categoria', value, this.cargo).subscribe(res => {
+      console.log(res);
       this.incidentes = res;
       this.loading = false;
     });
-  };
+  }
 
   markerClick = (infoWindow) => {
     if (this.previousInfoWindow == null) {

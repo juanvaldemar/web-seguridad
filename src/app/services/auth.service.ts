@@ -19,8 +19,8 @@ export class AuthService {
 
 
   logout() {
-    localStorage.removeItem('token');
-    this.userToken = ''
+    localStorage.clear();
+    this.userToken = '';
   }
 
   login( employee: Employee ) {
@@ -35,7 +35,6 @@ export class AuthService {
       authData
     ).pipe(
       map( resp => {
-        this.guardarToken( resp['idToken'] );
         return resp;
       })
     );
@@ -62,7 +61,7 @@ export class AuthService {
   }
 
 
-  private guardarToken( idToken: string ) {
+  guardarToken( idToken: string ) {
 
     this.userToken = idToken;
     localStorage.setItem('token', idToken);

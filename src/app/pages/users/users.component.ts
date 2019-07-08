@@ -17,18 +17,50 @@ export class UsersComponent implements OnInit {
     "Asesinato"
   ];
   categoriaSeleccionada = 'Todas'
-  loading:boolean = true
+  loading: boolean = true
   usuarios = [];
+  cargo = '';
   constructor(private usersService: UsersService, private excelService: ExcelService) {
   }
 
   ngOnInit() {
+    if (localStorage.getItem('cargo')) {
+      this.cargo = localStorage.getItem('cargo');
+      if (this.cargo === 'Policía') {
+        this.categorias = [
+          "Todas",
+          "Asalto",
+          "Secuestro",
+          "Prostitución",
+          "Asesinato"
+        ];
+      }
+      if (this.cargo === 'Bombero') {
+        this.categorias = [
+          "Todas",
+          "Incendio",
+          "Accidente",
+        ];
+      }
+    } else {
+      this.cargo = 'Administrador';
+      this.categorias = [
+        "Todas",
+        "Asalto",
+        "Secuestro",
+        "Prostitución",
+        "Asesinato",
+        "Incendio",
+        "Accidente",
+        "Otro"
+      ];
+    }
     this.filterBy(null)
   }
 
   filterBy = (value) => {
     value === 'Todas' ? value = null : null;
-    this.usersService.getUsers(value).subscribe(res => {
+    this.usersService.getUsers(value, this.cargo).subscribe(res => {
       this.usuarios = res;
       this.loading = false;
     });
